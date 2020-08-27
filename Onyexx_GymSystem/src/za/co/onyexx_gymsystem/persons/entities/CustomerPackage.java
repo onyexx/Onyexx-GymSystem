@@ -22,4 +22,47 @@ public class CustomerPackage {
 	@Column(name = "package_price")
 	private double packageprice;
 
+	
+	public int getPackageid() {
+		return packageid;
+	}
+
+	public void setPackageid(int packageid) {
+		this.packageid = packageid;
+	}
+
+	public String getPackagename() {
+		return packagename;
+	}
+
+	public void setPackagename(String packagename) {
+		this.packagename = packagename;
+	}
+
+	public double getPackageprice() {
+		return packageprice;
+	}
+
+	public void setPackageprice(double packageprice) {
+		this.packageprice = packageprice;
+	}
+
+	@Override
+	public String toString() {
+		return "CustomerPackage [packageid=" + packageid + ", packagename=" + packagename + ", packageprice="
+				+ packageprice + "]";
+	}
+
+	public CustomerPackage(int packageid, String packagename, double packageprice) {
+		super();
+		this.packageid = packageid;
+		this.packagename = packagename;
+		this.packageprice = packageprice;
+	}
+
+	public CustomerPackage() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 }

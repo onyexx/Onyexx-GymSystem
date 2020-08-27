@@ -15,7 +15,7 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "employee_id")
-	private int id;
+	private long id;
 	
 	@Column(name = "first_name")
 	private String firstname;
@@ -24,7 +24,7 @@ public class Employee {
 	private String lastname;
 	
 	@Column(name = "gender" )
-	private char gender;
+	private String gender;
 	
 	@Column(name = "phone_number")
 	private long phoneNumber;
@@ -69,12 +69,12 @@ public class Employee {
 	private static String username;
 	
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -99,12 +99,12 @@ public class Employee {
 	}
 
 
-	public char getGender() {
+	public String getGender() {
 		return gender;
 	}
 
 
-	public void setGender(char gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
@@ -234,7 +234,7 @@ public class Employee {
 
 
 	public void setPassword(String password) {
-		this.password = password;
+		Employee.password = password;
 	}
 
 
@@ -244,11 +244,11 @@ public class Employee {
 
 
 	public void setUsername(String username) {
-		this.username = username;
+		Employee.username = username;
 	}
 
 
-	public Employee(int id, String firstname, String lastname, char gender, long phoneNumber, String city,
+	public Employee(long id, String firstname, String lastname, String gender, long phoneNumber, String city,
 			String province, String country, int postalCode, String suburb, String street, LocalDate dateOfBirth,
 			String idNumber, String emailAddress, String nationality, String position, String password,
 			String username) {
@@ -269,12 +269,12 @@ public class Employee {
 		this.emailAddress = emailAddress;
 		this.nationality = nationality;
 		this.position = position;
-		this.password = password;
-		this.username = username;
+		Employee.password = password;
+		Employee.username = username;
 	}
 
 
-	public Employee() {
+	public Employee(String firstname2, String lastname2, String gender2, long phonenumber2, String city2, String province2, String country2, int postalCode2, String suburb2, String street2, String dateOfBirth2, String idNumber2, String emailAddress2, String nationality2, String position2, String username2, String password2) {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -290,7 +290,11 @@ public class Employee {
 				+ username + "]";
 	}
 
-	@Override
+
+
+
+
+@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -299,19 +303,17 @@ public class Employee {
 		result = prime * result + ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
 		result = prime * result + ((emailAddress == null) ? 0 : emailAddress.hashCode());
 		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
-		result = prime * result + gender;
-		result = prime * result + id;
+		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((idNumber == null) ? 0 : idNumber.hashCode());
 		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
 		result = prime * result + ((nationality == null) ? 0 : nationality.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + (int) (phoneNumber ^ (phoneNumber >>> 32));
 		result = prime * result + ((position == null) ? 0 : position.hashCode());
 		result = prime * result + postalCode;
 		result = prime * result + ((province == null) ? 0 : province.hashCode());
 		result = prime * result + ((street == null) ? 0 : street.hashCode());
 		result = prime * result + ((suburb == null) ? 0 : suburb.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
@@ -350,7 +352,10 @@ public class Employee {
 				return false;
 		} else if (!firstname.equals(other.firstname))
 			return false;
-		if (gender != other.gender)
+		if (gender == null) {
+			if (other.gender != null)
+				return false;
+		} else if (!gender.equals(other.gender))
 			return false;
 		if (id != other.id)
 			return false;
@@ -368,11 +373,6 @@ public class Employee {
 			if (other.nationality != null)
 				return false;
 		} else if (!nationality.equals(other.nationality))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
 			return false;
 		if (phoneNumber != other.phoneNumber)
 			return false;
@@ -398,15 +398,12 @@ public class Employee {
 				return false;
 		} else if (!suburb.equals(other.suburb))
 			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
 		return true;
 	}
 
+
 public static void login() {
+
 	//String username;
 	//String password;
 	int attempt = 0;
